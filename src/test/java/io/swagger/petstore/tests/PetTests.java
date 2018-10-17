@@ -15,6 +15,8 @@ public class PetTests {
         PetModel pet = new PetModel(PetStoreUtils.nameGenerator.name().firstName(), PetStoreUtils.idGenerator(), PetModel.Status.AVAILABLE.name());
         PetModel petResponse = new PetModelActions(pet).addNewPet();
         softAssert.assertThat(petResponse.getId()).isEqualTo(pet.getId());
+        softAssert.assertThat(petResponse.getName()).isEqualTo(pet.getName());
+        softAssert.assertThat(petResponse.getStatus()).isEqualTo(pet.getStatus());
         softAssert.assertAll();
     }
 
