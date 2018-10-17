@@ -25,6 +25,15 @@ public class PetModel {
 	@SerializedName("status")
 	private String status;
 
+	public PetModel(String name, int id, String status) {
+		this.photoUrls = null;
+		this.name = name;
+		this.id = id;
+		this.category = null;
+		this.tags = null;
+		this.status = status;
+	}
+
 	public void setPhotoUrls(List<String> photoUrls){
 		this.photoUrls = photoUrls;
 	}
@@ -85,4 +94,9 @@ public class PetModel {
 			",status = '" + status + '\'' + 
 			"}";
 		}
+
+	public static enum Status {
+		AVAILABLE, UNAVAILABLE
+	}
 }
+
