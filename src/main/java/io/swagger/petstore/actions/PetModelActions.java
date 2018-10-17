@@ -6,8 +6,10 @@ import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.parsing.Parser;
+import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import io.swagger.petstore.models.PetModel;
+import io.swagger.petstore.models.PetNotFoundModel;
 
 import static io.restassured.RestAssured.given;
 
@@ -35,8 +37,33 @@ public class PetModelActions {
                 .post().as(PetModel.class);
     }
 
+    public PetModel updatePet() {
+        return given(requestSpecification)
+                .body(pet)
+                .put().as(PetModel.class);
+    }
+
     public void deletePet() {
         given(requestSpecification)
                 .delete(String.valueOf(pet.getId()));
+    }
+
+    public Object getPet() {
+        Response response = given(requestSpecification).get(String.valueOf(pet.getId()));
+        if (response.statusCode() == 200) {
+            return response.as(PetModel.class);
+        } else {
+            return response.as(PetNotFoundModel.class);
+        }
+    }
+
+    public PetNotFoundModel getDeletedPet() {
+        return given(requestSpecification)
+                .get(String.valueOf(pet.getId()))
+                .then()
+                .statusCode(404)
+                .and()
+                .extract().response().as(PetNotFoundModel.class);
+
     }
 }

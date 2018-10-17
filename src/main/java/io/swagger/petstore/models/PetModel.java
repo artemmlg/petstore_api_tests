@@ -3,6 +3,7 @@ package io.swagger.petstore.models;
 import java.util.List;
 import javax.annotation.Generated;
 import com.google.gson.annotations.SerializedName;
+import io.swagger.petstore.utils.PetStoreUtils;
 
 @Generated("com.robohorse.robopojogenerator")
 public class PetModel {
@@ -32,6 +33,15 @@ public class PetModel {
 		this.category = null;
 		this.tags = null;
 		this.status = status;
+	}
+
+	public PetModel() {
+		this.photoUrls = null;
+		this.name = PetStoreUtils.nameGenerator.name().firstName();
+		this.id = PetStoreUtils.idGenerator();
+		this.category = null;
+		this.tags = null;
+		this.status = PetModel.Status.AVAILABLE.name();
 	}
 
 	public void setPhotoUrls(List<String> photoUrls){
