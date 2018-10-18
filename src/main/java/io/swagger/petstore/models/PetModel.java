@@ -105,7 +105,7 @@ public class PetModel {
 			"}";
 		}
 
-	public static enum Status {
+	public enum Status {
 		AVAILABLE, UNAVAILABLE
 	}
 }
